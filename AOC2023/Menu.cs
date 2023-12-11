@@ -6,5 +6,11 @@ namespace AOC2023
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form day1part1 = new Day1Part1();
+            day1part1.ShowDialog();
+        }
     }
 }
