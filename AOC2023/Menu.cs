@@ -9,7 +9,7 @@ namespace AOC2023
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form day1part1 = new Day1Part1();
+            Form day1part1 = new Day1();
             day1part1.ShowDialog();
         }
     }
