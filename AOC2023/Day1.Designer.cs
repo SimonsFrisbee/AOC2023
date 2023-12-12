@@ -36,6 +36,7 @@
             buttonRun = new Button();
             linkLabel1 = new LinkLabel();
             buttonRunAdvanced = new Button();
+            buttonSolution = new Button();
             SuspendLayout();
             // 
             // openFileDialog1
@@ -108,11 +109,12 @@
             buttonRunAdvanced.UseVisualStyleBackColor = true;
             buttonRunAdvanced.Click += buttonRunAdvanced_Click;
             // 
-            // Day1Part1
+            // Day1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(buttonSolution);
             Controls.Add(buttonRunAdvanced);
             Controls.Add(linkLabel1);
             Controls.Add(buttonRun);
@@ -120,7 +122,7 @@
             Controls.Add(textBoxAnswer);
             Controls.Add(buttonBrowse);
             Controls.Add(textBox1);
-            Name = "Day1Part1";
+            Name = "Day1";
             Text = "Day1Part1";
             ResumeLayout(false);
             PerformLayout();
@@ -136,5 +138,6 @@
         private Button buttonRun;
         private LinkLabel linkLabel1;
         private Button buttonRunAdvanced;
+        private Button buttonSolution;
     }
 }

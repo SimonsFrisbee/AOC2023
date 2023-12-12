@@ -65,7 +65,7 @@ namespace AOC2023
         {
 
             List<string> lines = File.ReadLines(filePath).ToList();
-            char[] digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+            char[] digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
             int firstIndex = -1;
             int first;
             int lastIndex = -1;
@@ -124,62 +124,68 @@ namespace AOC2023
         {
 
             List<string> lines = File.ReadLines(filePath).ToList();
-            Regex regex = new Regex(@"\d|one|two|three|four|five|six|seven|eight|nine");
+            StreamWriter writer = File.CreateText(filePath.Replace(".txt", "_output.csv"));
+            Regex regex = textDigits();
+            Regex regexReverse = textDigitsReverse();
             string firstNumber;
             string lastNumber;
             MatchCollection matchedNumbers;
+            MatchCollection matchedNumbersReverse;
             int first;
             int last;
             int sum = 0;
+            int subtotal = 0;
             foreach (string line in lines)
             {
                 matchedNumbers = regex.Matches(line);
+                matchedNumbersReverse = regexReverse.Matches(line);
                 if (matchedNumbers.Count != 0)
                 {
                     firstNumber = matchedNumbers[0].Value;
-                    lastNumber = matchedNumbers[matchedNumbers.Count - 1].Value;
+                    lastNumber = matchedNumbersReverse[0].Value;
                     first = stringToDigit(firstNumber);
                     last = stringToDigit(lastNumber);
-                    sum += 10 * first;
-                    sum += last;
+                    subtotal = 10 * first + last;
+                    sum += subtotal;
+                    writer.WriteLine(line+","+first.ToString()+","+last.ToString()+","+subtotal.ToString()+","+sum.ToString());
                 }
 
             }
+            writer.Close();
             textBoxAnswer.Text = sum.ToString();
         }
 
         private int stringToDigit(string str)
         {
-            if (str.Length==1)
+            switch (str)
             {
-                return int.Parse(str);
-            }
-            else
-            {
-                switch (str)
-                {
-                    case "one":
-                        return 1;
-                    case "two":
-                        return 2;
-                    case "three":
-                        return 3;
-                    case "four":
-                        return 4;
-                    case "five":
-                        return 5;
-                    case "six":
-                        return 6;
-                    case "seven":
-                        return 7;
-                    case "eight":
-                        return 8;
-                    case "nine":
-                        return 9;
-                    default:
-                        return 0;
-                }
+                case "one":
+                    return 1;
+                case "two":
+                    return 2;
+                case "three":
+                    return 3;
+                case "four":
+                    return 4;
+                case "five":
+                    return 5;
+                case "six":
+                    return 6;
+                case "seven":
+                    return 7;
+                case "eight":
+                    return 8;
+                case "nine":
+                    return 9;
+                default:
+                    return int.Parse(str);
             }
         }
+
+        [GeneratedRegex(@"\d|one|two|three|four|five|six|seven|eight|nine")]
+        private static partial Regex textDigits();
+        [GeneratedRegex(@"\d|one|two|three|four|five|six|seven|eight|nine",RegexOptions.RightToLeft)]
+        private static partial Regex textDigitsReverse();
+
     }
 }
